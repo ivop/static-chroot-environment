@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source ipALFS.env
+source ipalfs.env
 
 PACKAGES=$LFS/packages
 
