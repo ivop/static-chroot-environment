@@ -15,11 +15,12 @@ cd $HOME
 
 # symlinks, we do not patch stuff and no multilib
 
-mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
+mkdir -pv $LFS/{etc,var,root} $LFS/usr/{bin,lib,sbin}
 ln -s lib $LFS/usr/lib64
 for i in bin lib sbin lib64; do
     ln -svf usr/$i $LFS/$i
 done
+chmod 700 $LFS/root
 
 # CHAPTER 5
 
