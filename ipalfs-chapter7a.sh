@@ -5,6 +5,11 @@ set -ex
 umask 022
 export PATH=/sbin:/bin
 
+cat > /etc/hosts << EOF
+127.0.0.1  localhost
+::1        localhost
+EOF
+
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false
