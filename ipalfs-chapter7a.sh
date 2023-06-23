@@ -56,4 +56,7 @@ umask 022
 chown -R root:root /
 chmod 700 /root
 
+mkdir -pv /tmp
+chmod 1777 /tmp
+
 echo "DONE"
