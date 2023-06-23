@@ -46,11 +46,14 @@ EOF
 # for a compilation environment.
 
 mkdir -pv /dev
+umask 000
 mknod /dev/zero c 1 5
 mknod /dev/null c 1 3
 mknod /dev/random c 1 8
 mknod /dev/urandom c 1 9
+umask 022
 
 chown -R root:root /
+chmod 700 /root
 
 echo "DONE"
