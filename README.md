@@ -17,11 +17,15 @@ Build a fully static chroot environment based on LFS and musl.
 * copy chapter7 and chapter8 files to $LFS/root
 * As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin PS1='[(chroot) \u \w]# ' /bin/bash --login``
 * ipalfs-chapter7a creates some files we need
-* ....
+* ipalfs-chapter7b compiles the last temporary libraries and tools
+* make a backup of the roofs
+
+* ...
 
 ### Build times on octacore 3.5GHz amd64
 
 * chapter5: 17m17.809s
 * chapter6a: 9m20.996s
 * chapter6b: 18m44.842s
-
+* chapter7a: 0m0.218s
+* chapter7b: 16m7.881s
