@@ -40,8 +40,6 @@ make install-strip
 # PERL
 
 cd $BUILD_PACKAGES
-#tar xvJf $PACKAGES/perl-5.28.3.tar.xz
-#cd perl-5.28.3
 tar xvJf $PACKAGES/perl-5.36.1.tar.xz
 cd perl-5.36.1
 sh Configure \
