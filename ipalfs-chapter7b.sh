@@ -45,7 +45,7 @@ cd $BUILD_PACKAGES
 tar xvJf $PACKAGES/perl-5.36.1.tar.xz
 cd perl-5.36.1
 sh Configure \
-	-des -Dcc=gcc -A ldflags=-static -Dprefix=/usr -Dvendorprefix=/usr -Dusedevel '-Dlocinpth= ' -Duselargefiles -Dusethreads -Dd_semctl_semun -Dusenm -Ud_csh -Uusedl
+	-des -Dcc=gcc -A ldflags=-static -Dprefix=/usr -Dvendorprefix=/usr -Dusedevel '-Dlocinpth= ' -Duselargefiles -Dusethreads -Dd_semctl_semun -Dusenm -Ud_csh -Uusedl -Dinstallusrbinperl
 make $PARALLEL
 make install-strip
 
