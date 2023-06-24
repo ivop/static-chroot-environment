@@ -96,5 +96,6 @@ make install-strip
 rm -rf /usr/share/{info,man,doc}
 rm -f /lib/*.la
 rm -rf /tools
+rm -rf $BUILD_PACKAGES
 
 echo "CHAPTER 7 DONE"
