@@ -15,7 +15,7 @@ Build a fully static chroot environment based on LFS and musl.
 * From now on you can follow the LFS instructions and change ownership, add dev, proc, etc, passwd file, and so on, or treat it solely as a contained build environment as we will do here.
 
 * copy chapter7 and chapter8 files to $LFS/root
-* As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin PS1='[(chroot) \u \w]# ' /bin/bash --login``
+* As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin TERM=ansi PS1='[(chroot) \u \w]# ' /bin/bash --login``
 * ipalfs-chapter7a creates some files we need
 * ipalfs-chapter7b compiles the last temporary libraries and tools
 * make a backup of the roofs
