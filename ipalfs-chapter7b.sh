@@ -97,4 +97,4 @@ rm -rf /usr/share/{info,man,doc}
 rm -f /lib/*.la
 rm -rf /tools
 
-
+echo "CHAPTER 7 DONE"
