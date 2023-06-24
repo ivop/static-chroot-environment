@@ -43,8 +43,24 @@ cd $BUILD_PACKAGES
 tar xvJf $PACKAGES/perl-5.36.1.tar.xz
 cd perl-5.36.1
 sh Configure \
-	-des -Dcc=gcc -A ldflags=-static -Dprefix=/usr -Dvendorprefix=/usr -Dusedevel '-Dlocinpth= ' -Duselargefiles -Dusethreads -Dd_semctl_semun -Dusenm -Ud_csh -Uusedl -Dinstallusrbinperl
+	-des -Dcc=gcc -A ldflags=-static -Dprefix=/usr -Dvendorprefix=/usr -Dusedevel '-Dlocinpth= ' -Duselargefiles -Dusethreads -Dd_semctl_semun -Dusenm -Ud_csh -Uusedl -Dinstallusrbinperl -Uversiononly
 make $PARALLEL
 make install-strip
 
+# PYTHON
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/Python-3.11.2.tar.xz
+cd Python-3.11.2
+./configure --prefix=/usr   \
+            --disable-shared \
+            --enable-static \
+            --enable-optimizations \
+            --without-ensurepip
+cp $HOME/python-setup.txt Modules/Setup
+make LINKFORSHARED=" " $PARALLEL
+make install
+strip /usr/bin/python3.11
+
 #fi
+
