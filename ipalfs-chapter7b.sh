@@ -15,8 +15,6 @@ mkdir -pv $BUILD_PACKAGES
 
 export LDFLAGS=-static
 
-#if false; then
-
 # GETTEXT
 
 cd $BUILD_PACKAGES
@@ -62,5 +60,41 @@ make LINKFORSHARED=" " $PARALLEL
 make install
 strip /usr/bin/python3.11
 
-#fi
+# TEXIFO
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/texinfo-7.0.2.tar.xz
+cd texinfo-7.0.2
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# UTIL-LINUX
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/util-linux-2.38.1.tar.xz
+cd util-linux-2.38.1
+./configure \
+            --libdir=/usr/lib    \
+            --docdir=/usr/share/doc/util-linux-2.38.1 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-shared     \
+            --enable-static      \
+            --without-python     \
+            runstatedir=/run
+make LDFLAGS="-all-static" $PARALLEL
+make install-strip
+
+# CLEANUP
+
+rm -rf /usr/share/{info,man,doc}
+rm -f /lib/*.la
+rm -rf /tools
+
 
