@@ -9,6 +9,12 @@ mkdir -pv $PACKAGES
 cd $PACKAGES
 
 for i in \
+    https://www.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz \
+    https://ftp.nluug.nl/gnu/texinfo/texinfo-7.0.2.tar.xz \
+    https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz \
+    https://www.cpan.org/src/5.0/perl-5.36.0.tar.xz \
+    https://ftp.nluug.nl/gnu/bison/bison-3.8.2.tar.xz \
+    https://ftp.nluug.nl/gnu/gettext/gettext-0.21.1.tar.xz \
     https://ftp.nluug.nl/gnu/binutils/binutils-2.40.tar.xz \
     https://ftp.nluug.nl/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz \
     https://musl.libc.org/releases/musl-1.2.3.tar.gz \
