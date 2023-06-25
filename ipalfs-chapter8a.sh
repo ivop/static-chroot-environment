@@ -119,6 +119,19 @@ make $PARALLEL LDFLAGS=-all-static
 make install-strip
 ln -sv flex /usr/bin/lex
 
+# TCL
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/tcl8.6.13-src.tar.gz
+cd tcl8.6.13/unix
+./configure --enable-threads --disable-load --enable-shared=no \
+	--disable-symbols --enable-64bit --enable-static --disable-shared \
+	--prefix=/usr
+rm -rf ../pkgs/*  # skip non-core which is broken and keeps doing -shared
+make $PARALLEL
+make install-strip
+ln -sv tclsh8.6 /usr/bin/tclsh
+
 #fi
 
 # CLEANUP
