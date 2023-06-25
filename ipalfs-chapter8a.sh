@@ -65,12 +65,22 @@ cd $BUILD_PACKAGES
 tar xvzf $PACKAGES/zstd-1.5.4.tar.gz
 cd zstd-1.5.4
 cd lib
-make LDFLAGS=-static prefix=/usr $PARALLEL install-static
+make LDFLAGS=-static prefix=/usr $PARALLEL install-static install-pc install-includes
 cd ../programs
 make LDFLAGS=-static prefix=/usr $PARALLEL install
+
+# FILE
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/file-5.44.tar.gz
+cd file-5.44
+./configure --prefix=/usr --disable-shared --enable-static
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
 
 #fi
 
 # CLEANUP
 
 rm -rf /usr/man /usr/share/man /usr/share/doc
+rm -f /lib/*.la
