@@ -48,8 +48,6 @@ cd bzip2-1.0.8
 make install PREFIX=/usr LDFLAGS=-static
 strip /bin/{bzcat,bzip2,bzip2recover}
 
-#fi
-
 # XZ
 
 cd $BUILD_PACKAGES
@@ -61,7 +59,17 @@ cd xz-5.4.1
 make LDFLAGS=-all-static $PARALLEL
 make install-strip
 
+# ZSTD
 
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/zstd-1.5.4.tar.gz
+cd zstd-1.5.4
+cd lib
+make LDFLAGS=-static prefix=/usr $PARALLEL install-static
+cd ../programs
+make LDFLAGS=-static prefix=/usr $PARALLEL install
+
+#fi
 
 # CLEANUP
 
