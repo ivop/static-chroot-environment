@@ -78,9 +78,20 @@ cd file-5.44
 make LDFLAGS=-all-static $PARALLEL
 make install-strip
 
+# READLINE
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/readline-8.2.tar.gz
+cd readline-8.2
+patch -Np1 -i $HOME/readline-8.2-upstream_fix-1.patch
+./configure --prefix=/usr --enable-static --disable-shared --with-curses \
+		--docdir=/usr/share/doc/readline-8.2
+make $PARALLEL
+make install
+
 #fi
 
 # CLEANUP
 
 rm -rf /usr/man /usr/share/man /usr/share/doc
-rm -f /lib/*.la
+rm -f /lib/*.{la,old}
