@@ -89,6 +89,36 @@ patch -Np1 -i $HOME/readline-8.2-upstream_fix-1.patch
 make $PARALLEL
 make install
 
+# M4
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/m4-1.4.19.tar.xz
+cd m4-1.4.19
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# BC
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/bc-6.2.4.tar.xz
+cd bc-6.2.4
+CC=gcc ./configure --prefix=/usr -G -O3 -r
+gcc -static -DBC_ENABLE_AFL=0 -I./include/   -o ./gen/strgen ./gen/strgen.c
+make $PARALLEL LDFLAGS="-static -lreadline -lncurses"
+make install
+strip /bin/{bc,dc}
+
+# FLEX
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/flex-2.6.4.tar.gz
+cd flex-2.6.4
+./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.4 --disable-shared
+make $PARALLEL LDFLAGS=-all-static
+make install-strip
+ln -sv flex /usr/bin/lex
+
 #fi
 
 # CLEANUP
