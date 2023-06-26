@@ -47,10 +47,7 @@ users:x:999:
 nogroup:x:65534:
 EOF
 
-# We do not create /var /run /media /mnt et cetera. Just the bare minimum
-# for a compilation environment.
-
-mkdir -pv /dev
+mkdir -pv /dev /sys /proc /var /run
 umask 000
 mknod /dev/zero c 1 5
 mknod /dev/null c 1 3
