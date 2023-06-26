@@ -46,7 +46,7 @@ cd $BUILD_PACKAGES
 tar xvzf $PACKAGES/bzip2-1.0.8.tar.gz
 cd bzip2-1.0.8
 make install PREFIX=/usr LDFLAGS=-static
-strip /bin/{bzcat,bzip2,bzip2recover}
+strip /bin/{bzcat,bzip2,bzip2recover,bunzip2}
 
 # XZ
 
@@ -68,6 +68,7 @@ cd lib
 make LDFLAGS=-static prefix=/usr $PARALLEL install-static install-pc install-includes
 cd ../programs
 make LDFLAGS=-static prefix=/usr $PARALLEL install
+strip /bin/zstd
 
 # FILE
 
@@ -130,7 +131,26 @@ cd tcl8.6.13/unix
 rm -rf ../pkgs/*  # skip non-core which is broken and keeps doing -shared
 make $PARALLEL
 make install-strip
+make install-private-headers
+rm -f /usr/bin/tclsh
 ln -sv tclsh8.6 /usr/bin/tclsh
+
+# EXPECT
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/expect5.45.4.tar.gz
+cd expect5.45.4
+./configure --prefix=/usr           \
+            --with-tcl=/usr/lib     \
+            --disable-shared        \
+            --mandir=/usr/share/man \
+            --with-tclinclude=/usr/include
+sed -i 's/-ltcl8.6/-ltcl8.6 -ltclstub8.6 -lz/' Makefile
+make $PARALLEL
+make install
+rm -f /usr/lib/libexpect5.45.4.a
+ln -svf expect5.45.4/libexpect5.45.4.a /usr/lib
+strip /bin/expect
 
 #fi
 
