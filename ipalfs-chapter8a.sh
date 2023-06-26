@@ -135,7 +135,7 @@ make install-private-headers
 rm -f /usr/bin/tclsh
 ln -sv tclsh8.6 /usr/bin/tclsh
 
-# EXPECT
+# EXPECT (note: we need /dev and /proc mounted)
 
 cd $BUILD_PACKAGES
 tar xvzf $PACKAGES/expect5.45.4.tar.gz
@@ -151,6 +151,17 @@ make install
 rm -f /usr/lib/libexpect5.45.4.a
 ln -svf expect5.45.4/libexpect5.45.4.a /usr/lib
 strip /bin/expect
+
+# DEJAGNU
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/dejagnu-1.6.3.tar.gz
+cd dejagnu-1.6.3
+mkdir build
+cd build
+../configure --prefix=/usr
+make $PARALLEL
+make install
 
 #fi
 

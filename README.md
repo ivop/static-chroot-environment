@@ -21,7 +21,7 @@ Build a fully static chroot environment based on LFS and musl.
 * leave chroot and make a backup of the roofs
 
 * copy chapter8 files, python-setup.txt and readline patch to $LFS/root and
-enter chroot again
+enter chroot again (note: we need /proc and /dev mounted for expect to work)
 * run ipalfs-chapter8a to start building the actual chroot environment
 
 ### Build times on octacore 3.5GHz amd64
