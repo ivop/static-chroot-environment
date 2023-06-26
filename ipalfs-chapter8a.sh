@@ -163,6 +163,95 @@ cd build
 make $PARALLEL
 make install
 
+# BINUTILS
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/binutils-2.40.tar.xz
+cd binutils-2.40
+mkdir build
+cd build
+../configure --prefix=/usr       \
+             --sysconfdir=/etc   \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --disable-shared     \
+             --disable-werror    \
+             --enable-64-bit-bfd \
+             --with-system-zlib
+make configure-host
+make $PARALLEL tooldir=/usr LDFLAGS=--static
+make tooldir=/usr install-strip
+rm -f /bin/ld
+ln -s ld.bfd /bin/ld
+
+# GMP
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/gmp-6.2.1.tar.xz
+cd gmp-6.2.1
+./configure CFLAGS=-static --prefix=/usr    \
+            --enable-cxx     \
+            --disable-shared \
+            --docdir=/usr/share/doc/gmp-6.2.1
+make $PARALLEL
+make install
+
+# MPFR
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/mpfr-4.2.0.tar.xz
+cd mpfr-4.2.0
+./configure --prefix=/usr        \
+            --disable-shared     \
+            --enable-thread-safe \
+            --docdir=/usr/share/doc/mpfr-4.2.0
+make $PARALLEL
+make install
+
+# MPC
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/mpc-1.3.1.tar.gz
+cd mpc-1.3.1
+./configure --prefix=/usr    \
+            --disable-shared \
+            --docdir=/usr/share/doc/mpc-1.3.1
+make $PARALLEL
+make install
+
+# ATTR
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/attr-2.5.1.tar.gz
+cd attr-2.5.1
+./configure --prefix=/usr     \
+            --disable-shared  \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-2.5.1
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+
+# ACL
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/acl-2.3.1.tar.xz
+cd acl-2.3.1
+./configure --prefix=/usr         \
+            --disable-shared      \
+            --docdir=/usr/share/doc/acl-2.3.1
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+
+# LIBCAP
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/libcap-2.67.tar.xz
+cd libcap-2.67
+make CFLAGS=-static BUILD_CFLAGS=-static SHARED=no prefix=/usr lib=lib
+make install SHARED=no prefix=/usr lib=lib
+strip /sbin/{capsh,getcap,getpcaps,setcap}
+
 #fi
 
 # CLEANUP
