@@ -9,6 +9,19 @@ mkdir -pv $PACKAGES
 cd $PACKAGES
 
 for i in \
+    https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz \
+    https://sourceware.org/ftp/elfutils/0.188/elfutils-0.188.tar.bz2 \
+    https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz \
+    https://www.openssl.org/source/openssl-3.0.8.tar.gz \
+    https://ftp.nluug.nl/gnu/automake/automake-1.16.5.tar.xz \
+    https://ftp.nluug.nl/gnu/autoconf/autoconf-2.71.tar.xz \
+    https://ftp.nluug.nl/gnu/inetutils/inetutils-2.4.tar.xz \
+    https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz \
+    https://ftp.nluug.nl/gnu/gperf/gperf-3.1.tar.gz \
+    https://ftp.nluug.nl/gnu/gdbm/gdbm-1.23.tar.gz \
+    https://ftp.nluug.nl/gnu/libtool/libtool-2.4.7.tar.xz \
+    https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.6.tar.xz \
+    https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz \
     https://github.com/Mic92/iana-etc/releases/download/20230202/iana-etc-20230202.tar.gz \
     https://zlib.net/zlib-1.2.13.tar.xz \
     https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz \
