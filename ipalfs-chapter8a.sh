@@ -286,6 +286,7 @@ cd build
 make $PARALLEL
 make install-strip
 rm -f /bin/x86_64-lfs-linux-musl-*
+rm -rf /usr/x86_64-lfs-linux-musl
 
 #fi
 
