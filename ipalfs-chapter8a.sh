@@ -252,6 +252,41 @@ make CFLAGS=-static BUILD_CFLAGS=-static SHARED=no prefix=/usr lib=lib
 make install SHARED=no prefix=/usr lib=lib
 strip /sbin/{capsh,getcap,getpcaps,setcap}
 
+# SHADOW
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/shadow-4.13.tar.xz
+cd shadow-4.13
+touch /usr/bin/passwd
+./configure --sysconfdir=/etc \
+            --disable-shared  \
+            --with-group-name-max-length=32
+make LDFLAGS=-all-static $PARALLEL
+make exec_prefix=/usr install-strip
+
+# GCC again :)
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/gcc-12.2.0.tar.xz
+cd gcc-12.2.0
+mkdir build
+cd build
+../configure CFLAGS=-static --prefix=/usr            \
+             LD=ld                    \
+             --enable-languages=c,c++ \
+             --enable-default-pie     \
+             --enable-default-ssp     \
+             --disable-multilib       \
+             --disable-shared         \
+             --disable-host-shared    \
+             --disable-bootstrap      \
+             --with-boot-ldflags=-static     \
+             --with-stage1-ldflags=-static   \
+             --with-system-zlib
+make $PARALLEL
+make install-strip
+rm -f /bin/x86_64-lfs-linux-musl-*
+
 #fi
 
 # CLEANUP
