@@ -12,7 +12,7 @@ Build a fully static chroot environment based on LFS and musl.
 * ipalfs-chapter6a and 6b automate chapter 6.
 * You now have a chrootable directory lfs without shared libraries or dynamically linked binaries.
 * The tools directory can be deleted.
-* From now on you can follow the LFS instructions and change ownership, add dev, proc, etc, passwd file, and so on, or treat it solely as a contained build environment as we will do here.
+* From now on you can follow the LFS instructions and change ownership, add dev, proc, etc, passwd file, and so on. Note that some later steps need /proc and possibly /dev and /sys.
 
 * copy chapter7 files to $LFS/root
 * As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin TERM=ansi PS1='[(chroot) \u \w]# ' /bin/bash --login``
