@@ -326,6 +326,14 @@ make $PARALLEL -C libelf libelf.a
 make -C libelf install-libLIBRARIES install-includeHEADERS install-pkgincludeHEADERS
 install -vm644 config/libelf.pc /usr/lib/pkgconfig
 
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/libffi-3.4.4.tar.gz
+cd libffi-3.4.4
+./configure --prefix=/usr          \
+            --disable-shared
+make $PARALLEL
+make install
+
 #fi
 
 # CLEANUP
