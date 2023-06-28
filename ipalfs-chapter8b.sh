@@ -127,11 +127,85 @@ make $PARALLEL
 make install
 strip /bin/gperf
 
-#fi
+# EXPAT
 
-if false; then
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/expat-2.5.0.tar.xz
+cd expat-2.5.0
+./configure --prefix=/usr --disable-shared --docdir=/usr/share/doc/expat-2.5.0
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
 
-# BASH (postpone until we have autoconf)
+# INETUTILS
+# (proper /proc needs to be mounted to build)
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/inetutils-2.4.tar.xz
+cd inetutils-2.4
+./configure --prefix=/usr        \
+            --bindir=/usr/bin    \
+            --localstatedir=/var \
+            --disable-logger     \
+            --disable-rcp        \
+            --disable-rexec      \
+            --disable-rlogin     \
+            --disable-rsh        \
+            --disable-servers
+make $PARALLEL
+make install-strip
+mv /bin/ifconfig /sbin/ifconfig
+
+# LESS
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/less-608.tar.gz
+cd less-608
+./configure --prefix=/usr --sysconfdir=/etc
+make $PARALLEL
+make install-strip
+
+# PERL  (TODO: check cc="gcc -static" for previous PERL builds, it's better)
+
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/perl-5.36.1.tar.xz
+cd perl-5.36.1
+sh Configure \
+    -des -Dcc="gcc -static" -A ldflags=-static -Dprefix=/usr -Dvendorprefix=/usr -Dusedevel '-Dlocinpth= ' -Duselargefiles -Dusethreads -Dd_semctl_semun -Dusenm -Ud_csh -Uusedl -Dinstallusrbinperl -Uversiononly -Dpager="/usr/bin/less -isR"
+make $PARALLEL
+make install-strip
+unset BUILD_ZLIB BUILD_BZIP2
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/XML-Parser-2.46.tar.gz
+cd XML-Parser-2.46
+perl Makefile.PL
+make perl
+make install
+make -f Makefile.aperl inst_perl MAP_TARGET=perl
+make -f Makefile.aperl map_clean
+
+# INTLTOOL
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/intltool-0.51.0.tar.gz
+cd intltool-0.51.0
+sed -i 's:\\\${:\\\$\\{:' intltool-update.in
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# AUTOCONF
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/autoconf-2.71.tar.xz
+cd autoconf-2.71
+./configure --prefix=/usr
+make $PARALLEL
+make install
+
+# BASH (postponed until we have autoconf)
 
 cd $BUILD_PACKAGES
 tar xvzf $PACKAGES/bash-5.2.15.tar.gz
@@ -149,7 +223,7 @@ make install-strip
 rm -f /bin/sh
 ln -sv bash /bin/sh
 
-fi
+#fi
 
 # CLEANUP
 

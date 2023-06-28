@@ -15,6 +15,9 @@ for i in \
     https://www.openssl.org/source/openssl-3.0.8.tar.gz \
     https://ftp.nluug.nl/gnu/automake/automake-1.16.5.tar.xz \
     https://ftp.nluug.nl/gnu/autoconf/autoconf-2.71.tar.xz \
+    https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz \
+    https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz \
+    https://www.greenwoodsoftware.com/less/less-608.tar.gz \
     https://ftp.nluug.nl/gnu/inetutils/inetutils-2.4.tar.xz \
     https://prdownloads.sourceforge.net/expat/expat-2.5.0.tar.xz \
     https://ftp.nluug.nl/gnu/gperf/gperf-3.1.tar.gz \
