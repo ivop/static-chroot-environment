@@ -248,6 +248,84 @@ make $PARALLEL
 make install_sw install_ssldirs
 strip /bin/openssl
 
+# KMOD
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/kmod-30.tar.xz
+cd kmod-30
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --with-openssl         \
+            --with-xz              \
+            --with-zstd            \
+            --with-zlib
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+for target in depmod insmod modinfo modprobe rmmod; do
+  ln -sfv ../bin/kmod /usr/sbin/$target
+done
+ln -sfv kmod /usr/bin/lsmod
+
+# ARGP STANDALONE (non-LFS but we need it because we don't have glibc)
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/1.4.1.tar.gz
+cd argp-standalone-1.4.1
+libtoolize --force
+aclocal
+autoheader
+automake --force-missing --add-missing
+autoupdate
+autoconf
+./configure --prefix=/usr
+make $PARALLEL
+cp libargp.a /lib
+cp argp.h /usr/include
+
+# MUSL FTS (non-LFS)
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/v1.2.7.tar.gz
+cd musl-fts-1.2.7
+libtoolize --force
+aclocal
+autoheader
+automake --force-missing --add-missing
+autoupdate
+autoconf
+./configure --prefix=/usr
+make $PARALLEL
+make install
+
+# MUSL OBSTACK (non-LFS)
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/v1.2.3.tar.gz
+cd musl-obstack-1.2.3
+libtoolize --force
+aclocal
+autoheader
+automake --force-missing --add-missing
+autoupdate
+autoconf
+./configure --prefix=/usr
+make $PARALLEL
+make install
+
+# LIBELF
+
+cd $BUILD_PACKAGES
+tar xvjf $PACKAGES/elfutils-0.188.tar.bz2
+cd elfutils-0.188
+sed -i 's/dso_LDFLAGS="-shared"//' configure
+./configure --prefix=/usr                \
+            --disable-debuginfod         \
+            --disable-shared             \
+            --enable-libdebuginfod=dummy
+make $PARALLEL -C libelf libelf.a
+make -C libelf install-libLIBRARIES install-includeHEADERS install-pkgincludeHEADERS
+install -vm644 config/libelf.pc /usr/lib/pkgconfig
+
 #fi
 
 # CLEANUP

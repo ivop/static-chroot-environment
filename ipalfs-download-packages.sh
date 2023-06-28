@@ -12,6 +12,9 @@ for i in \
     https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz \
     https://sourceware.org/ftp/elfutils/0.188/elfutils-0.188.tar.bz2 \
     https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz \
+    https://github.com/void-linux/musl-obstack/archive/refs/tags/v1.2.3.tar.gz \
+    https://github.com/void-linux/musl-fts/archive/refs/tags/v1.2.7.tar.gz \
+    https://github.com/ericonr/argp-standalone/archive/1.4.1.tar.gz \
     https://www.openssl.org/source/openssl-3.0.8.tar.gz \
     https://ftp.nluug.nl/gnu/automake/automake-1.16.5.tar.xz \
     https://ftp.nluug.nl/gnu/autoconf/autoconf-2.71.tar.xz \
