@@ -223,6 +223,31 @@ make install-strip
 rm -f /bin/sh
 ln -sv bash /bin/sh
 
+# AUTOMAKE
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/automake-1.16.5.tar.xz
+cd automake-1.16.5
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.5
+make $PARALLEL
+make install
+
+# OPENSSL
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/openssl-3.0.8.tar.gz
+cd openssl-3.0.8
+./Configure --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         -static               \
+         no-shared             \
+         zlib
+sed -i 's/debugcolor//' providers/common/der/oids_to_c.pm
+make $PARALLEL
+make install_sw install_ssldirs
+strip /bin/openssl
+
 #fi
 
 # CLEANUP
