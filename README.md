@@ -23,7 +23,7 @@ Build a fully static chroot environment based on LFS and musl.
 * leave chroot and make a backup of the roofs
 
 * copy chapter8 files and readline patch to $LFS/root and
-enter chroot again (note: we need /proc and /dev mounted for expect to work)
+enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
 * run ipalfs-chapter8a to start building the actual chroot environment
 
 ### Build times on AMD FX-8320 octacore 3.5GHz
