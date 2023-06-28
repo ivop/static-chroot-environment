@@ -1,5 +1,7 @@
 # static-chroot-environment
 
+Static Linux From Scratch with musl.  
+
 Build a fully static chroot environment based on LFS and musl.  
 
 ### Instructions
