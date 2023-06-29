@@ -242,6 +242,7 @@ cd openssl-3.0.8
          --libdir=lib          \
          -static               \
          no-shared             \
+         threads               \
          zlib
 sed -i 's/debugcolor//' providers/common/der/oids_to_c.pm
 make $PARALLEL
