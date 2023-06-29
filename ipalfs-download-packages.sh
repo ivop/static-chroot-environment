@@ -9,6 +9,22 @@ mkdir -pv $PACKAGES
 cd $PACKAGES
 
 for i in \
+    https://github.com/slicer69/sysvinit/releases/download/3.06/sysvinit-3.06.tar.xz \
+    https://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz \
+    https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.47.0/e2fsprogs-1.47.0.tar.gz \
+    https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-4.0.2.tar.xz \
+    https://download.savannah.gnu.org/releases/man-db/man-db-2.11.2.tar.xz \
+    https://github.com/eudev-project/eudev/releases/download/v3.2.11/eudev-3.2.11.tar.gz \
+    https://anduin.linuxfromscratch.org/LFS/vim-9.0.1273.tar.xz \
+    https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz \
+    https://www.kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.xz \
+    https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.1.0.tar.xz \
+    https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz \
+    https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz \
+    https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz \
+    https://github.com/mesonbuild/meson/releases/download/1.0.0/meson-1.0.0.tar.gz \
+    https://github.com/ninja-build/ninja/archive/v1.11.1/ninja-1.11.1.tar.gz \
+    https://pypi.org/packages/source/w/wheel/wheel-0.38.4.tar.gz \
     https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz \
     https://sourceware.org/ftp/elfutils/0.188/elfutils-0.188.tar.bz2 \
     https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz \

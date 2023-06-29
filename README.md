@@ -25,6 +25,7 @@ Build a fully static chroot environment based on LFS and musl.
 * copy chapter8 files and readline patch to $LFS/root and
 enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
 * run ipalfs-chapter8a to start building the actual chroot environment
+* continue with chapter8b and 8c
 
 ### Build times on AMD FX-8320 octacore 3.5GHz
 
@@ -34,3 +35,4 @@ enter chroot again (note: we need /proc and /dev mounted for expect and inetutil
 * chapter7a: 0m0.218s
 * chapter7b: 16m7.881s
 * chapter8a: 24m42.194s 
+* chapter8b: 15m43.402s
