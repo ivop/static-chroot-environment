@@ -60,7 +60,7 @@ make LINKFORSHARED=" " $PARALLEL
 make install
 strip /usr/bin/python3.11
 
-# TEXIFO
+# TEXINFO
 
 cd $BUILD_PACKAGES
 tar xvJf $PACKAGES/texinfo-7.0.2.tar.xz
