@@ -10,7 +10,7 @@ Target is amd64/x86_64.
 
 * Follow LFS up to chapter 4. Create lfs user and group.
 * As user lfs, checkout this repo and run the scripts.
-* ipalfs-download-packages.sh to retrieve the needed packages.
+* Run ipalfs-download-packages.sh to retrieve the needed packages.
 * Optionally you can create a tarball of the lfs directory after each build step.
 * ipalfs-chapter5.sh automates chapter 5.
 * ipalfs-chapter6a and 6b automate chapter 6.
