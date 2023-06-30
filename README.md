@@ -18,17 +18,16 @@ Target is amd64/x86_64.
 * The tools directory can be deleted.
 * From now on you can follow the LFS instructions and change ownership, add dev, proc, etc, passwd file, and so on. Note that some later steps need /proc and possibly /dev and /sys.
   
-* Copy chapter7 files and python-setup.txt to $LFS/root
+* Copy chapter7 and chapter8 files, all patches and both python-setup.txt to $LFS/root
 * As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin TERM=ansi PS1='[(chroot) \u \w]# ' /bin/bash --login``
-* ipalfs-chapter7a creates some files we need
+* Run ipalfs-chapter7a which creates some files we need
 * ipalfs-chapter7b compiles the last temporary libraries and tools
 * Leave chroot and make a backup of the roofs
   
-* Copy chapter8 files, pythons-setup2.txt and patch files to $LFS/root and
-enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
+* Enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
 * Run ipalfs-chapter8a to start building the actual chroot environment
 * Continue with chapter8b and 8c
-* Yhis concludes the basic chroot. The contents of /root and /packages can be
+* This concludes the basic chroot. The contents of /root and /packages can be
 deleted. All files in /bin and /sbin should be stripped and /lib contains
 only static libraries.
 * Make a backup tarball of the rootfs before you continue
