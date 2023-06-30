@@ -50,3 +50,31 @@ and date. Defaults to Europe/Amsterdam.
 
 Total: circa 123m16s, just over two hours.  
 
+### Size after build
+
+```
+0       bin
+4.0K    dev
+816K    etc
+0       lib
+0       lib64
+0       proc
+16K     root
+4.0K    run
+0       sbin
+4.0K    sys
+8.0K    tmp
+1.1G    usr         <--- except for /etc, everything is here
+12K     var
+```
+
+/usr
+```
+217M    bin
+30M     include
+476M    lib
+0       lib64
+196M    libexec
+30M     sbin
+151M    share
+```
