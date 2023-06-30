@@ -22,7 +22,7 @@ Build a fully static chroot environment based on LFS and musl.
 * ipalfs-chapter7b compiles the last temporary libraries and tools
 * leave chroot and make a backup of the roofs
 
-* copy chapter8 files and readline patch to $LFS/root and
+* copy chapter8 files and patch files to $LFS/root and
 enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
 * run ipalfs-chapter8a to start building the actual chroot environment
 * continue with chapter8b and 8c
