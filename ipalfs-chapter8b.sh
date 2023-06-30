@@ -185,6 +185,7 @@ make perl
 make install
 make -f Makefile.aperl inst_perl MAP_TARGET=perl
 make -f Makefile.aperl map_clean
+strip /bin/{perl,perl5.36.1}
 
 # INTLTOOL
 
