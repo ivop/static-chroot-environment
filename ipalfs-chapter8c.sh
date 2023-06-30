@@ -136,6 +136,97 @@ make $PARALLEL
 make install-strip
 mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions
 
+# GZIP
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/gzip-1.12.tar.xz
+cd gzip-1.12
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# IPROUTE2
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/iproute2-6.1.0.tar.xz
+cd iproute2-6.1.0
+sed -i /ARPD/d Makefile
+rm -fv man/man8/arpd.8
+make NETNS_RUN_DIR=/run/netns LDFLAGS="-static -lelf -lz" CC="gcc -static" \
+        $PARALLEL V=1
+make SBINDIR=/usr/sbin install
+strip /sbin/{bridge,genl,ifstat,ip,lnstat,nstat,rtacct,rtmon,ss,tc}
+
+# KBD
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/kbd-2.5.1.tar.xz
+cd kbd-2.5.1
+sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+./configure --prefix=/usr --disable-vlock
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+
+# LIBPIPELINE
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/libpipeline-1.5.7.tar.gz
+cd libpipeline-1.5.7
+./configure --prefix=/usr --disable-shared
+make $PARALLEL
+make install
+
+# MAKE
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/make-4.4.tar.gz
+cd make-4.4
+sed -e '/ifdef SIGPIPE/,+2 d' \
+    -e '/undef  FATAL_SIG/i FATAL_SIG (SIGPIPE);' \
+    -i src/main.c
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# PATCH
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/patch-2.7.6.tar.xz
+cd patch-2.7.6
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# TAR
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/tar-1.34.tar.xz
+cd tar-1.34
+FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# TEXINFO
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/texinfo-7.0.2.tar.xz
+cd texinfo-7.0.2
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# VIM
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/vim-9.0.1273.tar.xz
+cd vim-9.0.1273
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+./configure --prefix=/usr
+make $PARALLEL
+make install
+ln -s vim /usr/bin/vi
+
 #fi
 
 # CLEANUP
