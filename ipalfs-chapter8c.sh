@@ -75,6 +75,67 @@ make $PARALLEL
 make install-strip
 mv -v /usr/bin/chroot /usr/sbin
 
+# CHECK
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/check-0.15.2.tar.gz
+cd check-0.15.2
+./configure --prefix=/usr --disable-shared
+make $PARALLEL
+make install
+
+# DIFFUTILS
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/diffutils-3.9.tar.xz
+cd diffutils-3.9
+./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# GAWK
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/gawk-5.2.0.tar.xz
+cd gawk-5.2.0
+sed -i 's/extras//' Makefile.in
+./configure --prefix=/usr
+make $PARALLEL
+make LN='ln -f' install-strip
+
+# FINDUTILS
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/findutils-4.9.0.tar.xz
+cd findutils-4.9.0
+./configure --prefix=/usr                   \
+            --localstatedir=/var/lib/locate
+make $PARALLEL
+make install-strip
+
+# GROFF
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/groff-1.22.4.tar.gz
+cd groff-1.22.4
+PAGE=A4 ./configure --prefix=/usr
+make $PARALLEL
+make install-strip
+
+# GRUB
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/grub-2.06.tar.xz
+cd grub-2.06
+patch -Np1 -i $HOME/grub-2.06-upstream_fixes-1.patch
+./configure --prefix=/usr --sysconfdir=/etc --disable-efiemu --disable-werror \
+        BUILD_LDFLAGS=-static --with-platform=efi --target=x86_64
+sed -i 's/BUILD_SIZEOF_LONG/BUILD_SIZEOF_LONG 8/' config.h
+sed -i 's/BUILD_SIZEOF_VOID_P/BUILD_SIZEOF_VOID_P 8/' config.h
+make $PARALLEL
+make install-strip
+mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions
+
 #fi
 
 # CLEANUP
