@@ -15,7 +15,7 @@ mkdir -pv $BUILD_PACKAGES
 
 export LDFLAGS=-static
 
-#if false; then
+if false; then
 
 # PYTHON
 
@@ -227,7 +227,116 @@ make $PARALLEL
 make install
 ln -s vim /usr/bin/vi
 
-#fi
+# EUDEV (this libtool and forked of systemd mess doesn't play well with static
+#        linking; won't waste more time on it as I don't need it)
+#
+#cd $BUILD_PACKAGES
+#tar xvzf $PACKAGES/eudev-3.2.11.tar.gz
+#cd eudev-3.2.11
+#sed -i '/udevdir/a udev_dir=${udevdir}' src/udev/udev.pc.in
+#./configure --prefix=/usr           \
+#            --bindir=/usr/sbin      \
+#            --sysconfdir=/etc       \
+#            --disable-manpages      \
+#            --disable-shared
+#make LDFLAGS="-all-static" $PARALLEL V=1
+#mkdir -pv /usr/lib/udev/rules.d
+#mkdir -pv /etc/udev/rules.d
+#make install-strip
+
+# MAN-DB
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/man-db-2.11.2.tar.xz
+cd man-db-2.11.2
+./configure --prefix=/usr                         \
+            --docdir=/usr/share/doc/man-db-2.11.2 \
+            --sysconfdir=/etc                     \
+            --disable-setuid                      \
+            --enable-cache-owner=bin              \
+            --with-browser=/usr/bin/lynx          \
+            --with-vgrind=/usr/bin/vgrind         \
+            --with-grap=/usr/bin/grap             \
+            --with-systemdtmpfilesdir=            \
+            --with-systemdsystemunitdir=
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+
+# PROCPS-NG
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/procps-ng-4.0.2.tar.xz
+cd procps-ng-4.0.2
+./configure --prefix=/usr                           \
+            --docdir=/usr/share/doc/procps-ng-4.0.2 \
+            --disable-shared                        \
+            --disable-w                             \
+            --disable-kill
+make LDFLAGS=-all-static $PARALLEL
+make install-strip
+
+# UTIL-LINUX
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/util-linux-2.38.1.tar.xz
+cd util-linux-2.38.1
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
+            --bindir=/usr/bin    \
+            --libdir=/usr/lib    \
+            --sbindir=/usr/sbin  \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-shared     \
+            --without-python     \
+            --without-systemd    \
+            --without-systemdsystemunitdir \
+            --docdir=/usr/share/doc/util-linux-2.38.1
+make LDFLAGS="-all-static" $PARALLEL
+make install-strip
+
+fi
+
+# E2FSPROGS
+
+cd $BUILD_PACKAGES
+tar xvzf $PACKAGES/e2fsprogs-1.47.0.tar.gz
+cd e2fsprogs-1.47.0
+mkdir build
+cd build
+../configure --prefix=/usr           \
+             --sysconfdir=/etc       \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck
+make $PARALLEL
+make install-strip
+strip /bin/{ch,ls}attr
+
+# SYSKLOGD is crap and doesn't build with a modern standards compliant musl
+#
+#cd $BUILD_PACKAGES
+#tar xvzf $PACKAGES/sysklogd-1.5.1.tar.gz
+#cd sysklogd-1.5.1
+##sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
+##sed -i 's/union wait/int/' syslogd.c
+#make $PARALLEL
+#make BINDIR=/sbin install
+
+# SYSVINIT
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/sysvinit-3.06.tar.xz
+cd sysvinit-3.06
+patch -Np1 -i $HOME/sysvinit-3.06-consolidated-1.patch
+make $PARALLEL
+make install
+strip /sbin/{bootlogd,fstab-decode,halt,init,killall5,runlevel,shutdown}
 
 # CLEANUP
 
