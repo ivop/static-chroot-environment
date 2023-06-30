@@ -4,6 +4,8 @@ Static Linux From Scratch with musl.
 
 Build a fully static chroot environment based on LFS and musl.  
 
+Target is amd64/x86_64.  
+
 ### Instructions
 
 * Follow LFS up to chapter 4. Create lfs user and group.
@@ -15,21 +17,25 @@ Build a fully static chroot environment based on LFS and musl.
 * You now have a chrootable directory lfs without shared libraries or dynamically linked binaries.
 * The tools directory can be deleted.
 * From now on you can follow the LFS instructions and change ownership, add dev, proc, etc, passwd file, and so on. Note that some later steps need /proc and possibly /dev and /sys.
-
-* copy chapter7 files and python-setup.txt to $LFS/root
+  
+* Copy chapter7 files and python-setup.txt to $LFS/root
 * As root, run: ``chroot /home/lfs/lfs env -i HOME=/root PATH=/sbin:/bin TERM=ansi PS1='[(chroot) \u \w]# ' /bin/bash --login``
 * ipalfs-chapter7a creates some files we need
 * ipalfs-chapter7b compiles the last temporary libraries and tools
-* leave chroot and make a backup of the roofs
-
-* copy chapter8 files and patch files to $LFS/root and
+* Leave chroot and make a backup of the roofs
+  
+* Copy chapter8 files, pythons-setup2.txt and patch files to $LFS/root and
 enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
-* run ipalfs-chapter8a to start building the actual chroot environment
-* continue with chapter8b and 8c
-* this concludes the basic chroot. The contents of /root and /packages can be
+* Run ipalfs-chapter8a to start building the actual chroot environment
+* Continue with chapter8b and 8c
+* Yhis concludes the basic chroot. The contents of /root and /packages can be
 deleted. All files in /bin and /sbin should be stripped and /lib contains
 only static libraries.
-
+* Make a backup tarball of the rootfs before you continue
+* Note that ksyslogd, eudev (systemd fork libtool abomination), Meson and
+Wheel are missing. I don't need them. YMMV.
+* All documentation is either not installed or removed.
+  
 ### Build times on AMD FX-8320 octacore 3.5GHz
 
 * chapter5: 17m17.809s
@@ -39,3 +45,7 @@ only static libraries.
 * chapter7b: 16m7.881s
 * chapter8a: 24m42.194s 
 * chapter8b: 15m43.402s
+* chapter8c: 21m25.474s
+
+Total: circa 123m16s, just over two hours.  
+
