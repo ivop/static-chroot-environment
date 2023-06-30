@@ -15,7 +15,7 @@ mkdir -pv $BUILD_PACKAGES
 
 export LDFLAGS=-static
 
-if false; then
+#if false; then
 
 # PYTHON
 
@@ -299,8 +299,6 @@ cd util-linux-2.38.1
 make LDFLAGS="-all-static" $PARALLEL
 make install-strip
 
-fi
-
 # E2FSPROGS
 
 cd $BUILD_PACKAGES
@@ -337,6 +335,8 @@ patch -Np1 -i $HOME/sysvinit-3.06-consolidated-1.patch
 make $PARALLEL
 make install
 strip /sbin/{bootlogd,fstab-decode,halt,init,killall5,runlevel,shutdown}
+
+#fi
 
 # CLEANUP
 

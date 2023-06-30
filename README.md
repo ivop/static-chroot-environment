@@ -26,6 +26,9 @@ Build a fully static chroot environment based on LFS and musl.
 enter chroot again (note: we need /proc and /dev mounted for expect and inetutils to work and/or build correctly)
 * run ipalfs-chapter8a to start building the actual chroot environment
 * continue with chapter8b and 8c
+* this concludes the basic chroot. The contents of /root and /packages can be
+deleted. All files in /bin and /sbin should be stripped and /lib contains
+only static libraries.
 
 ### Build times on AMD FX-8320 octacore 3.5GHz
 
