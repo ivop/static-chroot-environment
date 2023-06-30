@@ -34,6 +34,8 @@ only static libraries.
 * Note that ksyslogd, eudev (systemd fork libtool abomination), Meson and
 Wheel are missing. I don't need them. YMMV.
 * All documentation is either not installed or removed.
+* Add ``export TZ=$(cat /etc/timezone)`` to /root/.profile for correct time
+and date. Defaults to Europe/Amsterdam.
   
 ### Build times on AMD FX-8320 octacore 3.5GHz
 
