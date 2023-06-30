@@ -32,7 +32,12 @@ deleted. All files in /bin and /sbin should be stripped and /lib contains
 only static libraries.
 * Make a backup tarball of the rootfs before you continue
 * Note that ksyslogd, eudev (systemd fork libtool abomination), Meson and
-Wheel are missing. I don't need them. YMMV.
+Wheel are missing. I don't need them. YMMV. ksyslogd's codebase won't build
+with a modern standards compliant musl and there is no configure. eudev has
+numerous problems with link order, libtool and its systemd heritage. Wheel
+runs stuff intended for macos X unconiditionally and relies on _ctypes_ which
+is not available when there is no dynamic loader. Could be patched out.
+Meson depends on Wheel, hence no Meson.
 * All documentation is either not installed or removed.
 * Add ``export TZ=$(cat /etc/timezone)`` to /root/.profile for correct time
 and date. Defaults to Europe/Amsterdam.
