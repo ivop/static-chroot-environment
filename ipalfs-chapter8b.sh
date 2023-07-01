@@ -181,8 +181,9 @@ cd $BUILD_PACKAGES
 tar xvzf $PACKAGES/XML-Parser-2.46.tar.gz
 cd XML-Parser-2.46
 perl Makefile.PL
-make perl
+make $PARALLEL
 make install
+make perl
 make -f Makefile.aperl inst_perl MAP_TARGET=perl
 make -f Makefile.aperl map_clean
 strip /bin/{perl,perl5.36.1}
