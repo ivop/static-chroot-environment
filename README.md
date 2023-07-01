@@ -30,7 +30,8 @@ Target is amd64/x86_64.
 * This concludes the basic chroot. The contents of /root and /packages can be
 deleted. All files in /bin and /sbin should be stripped and /lib contains
 only static libraries.
-* Make a backup tarball of the rootfs before you continue
+* Make a backup tarball of the rootfs before you continue. Remember to
+unmount /proc, /dev/ and /sys first!
 * Note that ksyslogd, eudev (systemd fork libtool abomination), Meson and
 Wheel are missing. I don't need them. YMMV. ksyslogd's codebase won't build
 with a modern standards compliant musl and there is no configure. eudev has
