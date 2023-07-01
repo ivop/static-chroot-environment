@@ -35,7 +35,7 @@ only static libraries.
 Wheel are missing. I don't need them. YMMV. ksyslogd's codebase won't build
 with a modern standards compliant musl and there is no configure. eudev has
 numerous problems with link order, libtool and its systemd heritage. Wheel
-runs stuff intended for macos X unconiditionally and relies on _ctypes_ which
+runs stuff intended for macos X unconditionally and relies on _ctypes_ which
 is not available when there is no dynamic loader. Could be patched out.
 Meson depends on Wheel, hence no Meson.
 * Extra packages are standalone argp, musl-fts and musl-obstack.
