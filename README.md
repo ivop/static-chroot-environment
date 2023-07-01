@@ -54,7 +54,7 @@ and date. Defaults to Europe/Amsterdam.
 * chapter8b: 15m43.402s
 * chapter8c: 21m25.474s
 
-Total: circa 123m16s, just over two hours.  
+Total: circa 124 minutes, just over two hours.  
 
 ### Size after build
 
