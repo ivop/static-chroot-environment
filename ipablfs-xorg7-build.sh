@@ -169,6 +169,42 @@ for i in \
     make install-strip
 done
 
+# LIBXCVT
+# we don't have meson, but it's easy to build
+
+cd $BUILD_PACKAGES
+tar xvJf $PACKAGES/libxcvt-0.1.2.tar.xz
+cd libxcvt-0.1.2
+cd lib
+gcc -O3 -I../include -c -o libxcvt.o libxcvt.c
+ar rcs libxcvt.a libxcvt.o
+ranlib libxcvt.a
+cd ../cvt
+gcc -static -I../include -ocvt cvt.c ../lib/libxcvt.a
+cd ..
+cp lib/libxcvt.a /lib
+cp cvt/cvt /bin
+
+# XCB-UTIL-* (order matters)
+
+for i in \
+    xcb-util-0.4.1.tar.xz \
+    xcb-util-image-0.4.1.tar.xz \
+    xcb-util-keysyms-0.4.1.tar.xz \
+    xcb-util-renderutil-0.3.10.tar.xz \
+    xcb-util-wm-0.4.2.tar.xz \
+    xcb-util-cursor-0.1.4.tar.xz \
+     ; do
+
+    cd $BUILD_PACKAGES
+    tar xvJf $PACKAGES/$i
+    j=`basename $i .tar.xz`
+    cd $j
+    ./configure $XORG_CONFIG LIBS="-lXau -lXdmcp"
+    make $PARALLEL
+    make install
+done
+
 #fi
 
 # CLEANUP
