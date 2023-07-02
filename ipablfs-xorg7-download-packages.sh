@@ -9,6 +9,7 @@ mkdir -pv $PACKAGES
 cd $PACKAGES
 
 for i in \
+    https://dri.freedesktop.org/libdrm/libdrm-2.4.115.tar.xz \
     https://www.x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2 \
     https://www.x.org/pub/individual/lib/libxcvt-0.1.2.tar.xz \
     https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz \
