@@ -9,6 +9,14 @@ mkdir -pv $PACKAGES
 cd $PACKAGES
 
 for i in \
+    https://www.x.org/pub/individual/lib/libxcvt-0.1.2.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-image-0.4.1.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.1.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.10.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.2.tar.xz \
+    https://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.4.tar.xz \
+    https://mesa.freedesktop.org/archive/mesa-22.3.5.tar.xz \
     https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.2.tar.xz \
     https://downloads.sourceforge.net/freetype/freetype-2.13.0.tar.xz \
     https://www.x.org/pub/individual/util/util-macros-1.20.0.tar.xz \
